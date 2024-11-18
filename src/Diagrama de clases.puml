@@ -1,0 +1,118 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!pragma layout smetana
+set separator none
+
+package cl.ucn.disc.pa.taller3 {
+    package modelo {
+
+        abstract class Funcion <<abstract>> {
+            # codigo: int
+            # nombre: String
+            # duracion: int
+            # precio: int
+            # horario: String
+            # asientos: int[]
+            + Funcion(codigo: int, nombre: String, duracion: int, precio: int,
+            horario: String)
+            + gets y sets()
+            }
+        class Pelicula {
+
+            - genero: String
+            - nominadaAlOscar: boolean
+
+            + Pelicula(codigo: int, nombre: String, duracion: int, precio: int,
+                           horario: String, genero: String, horario: String)
+            + gets y sets()
+            }
+
+        class ObraDeTeatro{
+            - autor: String
+            - cantidadDeActos: int
+
+            + ObraDeTeatro(codigo: int, nombre: String, duracion: int, precio: int,
+                                   horario: String, autor: String, cantidadDeActos: int)
+            + gets y sets()
+        }
+
+        class Documental{
+            - tema: String
+            - anioProduccion: int
+
+            + Documental(codigo: int, nombre: String, duracion: int, precio: int,
+                               horario: String, tema: String, anioProduccion: int)
+            + gets y sets()
+        }
+
+        class ContenedorFunciones{
+            - cantMax: int
+            - cantActual: int
+            - listaFunciones: Funcion[]
+            + ContenedorUsuarios(cantMax: int){
+            + agregar(nuevaFuncion: Funcion)
+            + buscar(referencia: String)
+            + obtener(posicion: int)
+        }
+
+        class Usuario{
+            - rut: String
+            - contrasenia: String
+            - membresia: boolean
+
+            + Usuario(rut: String, contrasenia: String)
+            + gets y sets()
+
+        }
+
+        class ContenedorUsuarios{
+            - cantMax: int
+            - cantActual: int
+            - listaUsuarios: Usuario[]
+
+            + ContenedorUsuarios(cantMax: int){
+            + agregar(nuevoUsuario: usuario)
+            + buscar(rut: String)
+            + obtener(posicion: int)
+        }
+    }
+
+    package Infraestructura {
+        class Vista {
+        - sistema: ISistemaFunciones
+
+        + Vista(sistema: ISistemaFunciones)
+        + init(): void
+
+        }
+
+        interface ISistemaFunciones <<interface>> {
+        + iniciarSesion(usuario: String, contrasenia: String): boolean
+        + registrarse(usuario: String, contrasenia: String): boolean
+        + verFunciones(referencia: String, formato: String): String
+        + comprarEntradas(cantidad: int, asientos: int, usuarioEsMiembro: boolean): boolean
+        }
+    }
+
+    package servicios {
+
+        class SistemaFunciones {
+            - listaUsuarios: ContenedorUsuarios
+            - usuarioActivo: Usuario
+            + SistemaFunciones()
+        }
+    }
+
+    Pelicula ---|> Funcion
+    ObraDeTeatro ---|> Funcion
+    Documental ---|> Funcion
+
+    SistemaFunciones ...|> ISistemaFunciones
+    Vista "1" *--- "1" ISistemaFunciones
+
+    ContenedorUsuarios "1" ---* "1" SistemaFunciones
+    ContenedorFunciones "1" ---* "1" SistemaFunciones
+    ContenedorUsuarios "1" o--- "0..*" Usuario
+    ContenedorFunciones "1" o--- "0..*" Funcion
+}
+@enduml
