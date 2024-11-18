@@ -1,8 +1,6 @@
 @startuml
 !pragma layout smetana
 
-package "Modelo de Dominio" {
-
     class "Cliente" {
         - RUT
         - Membresía
@@ -15,40 +13,12 @@ package "Modelo de Dominio" {
         - Precio
     }
 
-    class "Pelicula" {
-        - Género
-        - Nominada al Oscar
-    }
-
-    class "Obra de Teatro" {
-        - Autor
-        - Cantidad de actos
-    }
-
-    class "Documental" {
-        - Tema
-        - Año de producción
-    }
-
-    class "Boleto" {
-        - Asiento
-        - Cantidad
-        - Precio Total
-    }
-
     class "Sistema de Gestión" {
         - Lista de Funciones
         - Lista de Usuarios
     }
 
-    "Función" <|-- "Pelicula"
-    "Función" <|-- "Obra de Teatro"
-    "Función" <|-- "Documental"
-
-    "Cliente" o-- "Boleto"
-    "Boleto" *-- "Función"
-    "Sistema de Gestión" o-- "Cliente"
+    "Sistema de Gestión" "Registra venta" o-- "Cliente"
     "Sistema de Gestión" o-- "Función"
-}
 
 @enduml
