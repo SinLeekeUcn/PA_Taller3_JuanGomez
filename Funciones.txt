@@ -1,0 +1,30 @@
+101,Inception,148,10000,noche,Ciencia ficción,si
+102,The Godfather,175,12000,noche,Drama,si
+103,The Dark Knight,152,11000,tarde,Acción,si
+203,La Casa de Bernarda Alba,120,15000,mañana,Federico García Lorca,3
+204,Esperando a Godot,150,17000,tarde,Samuel Beckett,2
+205,Don Juan Tenorio,180,20000,noche,José Zorrilla,4
+206,Bodas de Sangre,110,14000,mañana,Federico García Lorca,3
+304,Before the Flood,96,8000,mañana,Calentamiento global,2016
+305,The Social Dilemma,94,9000,tarde,Redes sociales,2020
+306,Apollo 11,93,10000,noche,Misión espacial,2019
+104,Titanic,195,13000,noche,Romance,si
+105,Joker,122,9000,mañana,Drama,si
+110,Parasite,132,12000,tarde,Suspenso,si
+201,Hamlet,180,20000,noche,William Shakespeare,5
+202,Romeo y Julieta,160,18000,tarde,William Shakespeare,5
+207,El Rey Lear,170,19000,noche,William Shakespeare,5
+208,La Dama Boba,130,16000,tarde,Lope de Vega,3
+209,Fuenteovejuna,140,17000,tarde,Lope de Vega,3
+106,Interstellar,169000,14,tarde,Ciencia ficción,no
+107,Forrest Gump,142,10000,mañana,Drama,si
+308,Inside Job,108,11000,tarde,Crisis financiera,2010
+309,Won’t You Be My Neighbor?,94,9000,mañana,Historia de Fred Rogers,2018
+310,Jiro Dreams of Sushi,81,7000,tarde,Gastronomía,2011
+108,Avengers: Endgame,181,15000,tarde,Acción,si
+109,The Matrix,136,10000,noche,Ciencia ficción,no
+302,Free Solo,100,10000,noche,Escalada,2018
+303,13th,100,9000,tarde,Justicia racial,2016
+210,La Gaviota,150,18000,noche,Antón Chéjov,4
+301,Nuestro Planeta,95,8000,mañana,Cambio climático,2019
+307,Blackfish,83,7000,mañana,Maltrato animal,2013

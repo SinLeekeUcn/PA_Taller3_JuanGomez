@@ -12,7 +12,9 @@ package cl.ucn.disc.pa.taller3 {
             # duracion: int
             # precio: int
             # horario: String
-            # asientos: int[]
+            # asientos: String[]
+            # asientosDisponibles: int
+            # disponible: boolean
             + Funcion(codigo: int, nombre: String, duracion: int, precio: int,
             horario: String)
             + gets y sets()
@@ -33,6 +35,7 @@ package cl.ucn.disc.pa.taller3 {
 
             + ObraDeTeatro(codigo: int, nombre: String, duracion: int, precio: int,
                                    horario: String, autor: String, cantidadDeActos: int)
+            + toString(): String
             + gets y sets()
         }
 
@@ -45,16 +48,6 @@ package cl.ucn.disc.pa.taller3 {
             + gets y sets()
         }
 
-        class ContenedorFunciones{
-            - cantMax: int
-            - cantActual: int
-            - listaFunciones: Funcion[]
-            + ContenedorUsuarios(cantMax: int){
-            + agregar(nuevaFuncion: Funcion)
-            + buscar(referencia: String)
-            + obtener(posicion: int)
-        }
-
         class Usuario{
             - rut: String
             - contrasenia: String
@@ -62,35 +55,58 @@ package cl.ucn.disc.pa.taller3 {
 
             + Usuario(rut: String, contrasenia: String)
             + gets y sets()
+        }
 
+        package colecciones {
+
+        abstract class Contenedor{
+            # listaElementos: Elemento[]
+            # cantMaxima: int
+            # cantActual: int
+
+
+            + Contenedor(cantMax: int)
+            + agregar(Elemento elemento): boolean
+            + obtener(posicion: int): Elemento
+            + gets()
         }
 
         class ContenedorUsuarios{
-            - cantMax: int
-            - cantActual: int
-            - listaUsuarios: Usuario[]
+            + ContenedorUsuarios(cantMax: int)
+            + buscar(tipoBusqueda: String, referencia: String): int[]
+            }
 
-            + ContenedorUsuarios(cantMax: int){
-            + agregar(nuevoUsuario: usuario)
-            + buscar(rut: String)
-            + obtener(posicion: int)
+         class ContenedorFunciones{
+            + obtenerUsuario(rut: String): Usuario
+            }
         }
     }
 
     package Infraestructura {
         class Vista {
-        - sistema: ISistemaFunciones
+        - sistema: ISistemaTeatro
 
-        + Vista(sistema: ISistemaFunciones)
+        + Vista(sistema: ISistemaTeatro)
         + init(): void
+        - menuPrincipal(): void
+        - opcion1(): void
+        - opcion2(): void
+        - opcion3(): void
+        - iniciarSesion(): boolean
+        - registrarse(): boolean
 
         }
 
-        interface ISistemaFunciones <<interface>> {
-        + iniciarSesion(usuario: String, contrasenia: String): boolean
-        + registrarse(usuario: String, contrasenia: String): boolean
-        + verFunciones(referencia: String, formato: String): String
-        + comprarEntradas(cantidad: int, asientos: int, usuarioEsMiembro: boolean): boolean
+        interface ISistemaTeatro <<interface>> {
+            + lecturaDeDocumentos(): boolean
+        	+ iniciarSesion(rut: String, contrasenia: String): boolean
+        	+ registrarse(rut: String, contrasenia: String): boolean
+        	+ cerrarSesion(): void
+        	+ comprarEntrada(cantEntradas: int,asientosComprados: int[], codigoFuncion: String): boolean
+        	+ verAsientos(codigoFuncion: String): String
+        	+ verFuncionesDisponibles(): String
+        	+ buscarFuncion(opcionDeBusqueda: String, referencia: String, tipoDato: String): String
+        	+ returnUsuario(): Usuario
         }
     }
 
@@ -107,12 +123,18 @@ package cl.ucn.disc.pa.taller3 {
     ObraDeTeatro ---|> Funcion
     Documental ---|> Funcion
 
-    SistemaFunciones ...|> ISistemaFunciones
-    Vista "1" *--- "1" ISistemaFunciones
+    SistemaFunciones ...|> ISistemaTeatro
+    Vista "1" *--- "1" ISistemaTeatro
 
-    ContenedorUsuarios "1" ---* "1" SistemaFunciones
-    ContenedorFunciones "1" ---* "1" SistemaFunciones
-    ContenedorUsuarios "1" o--- "0..*" Usuario
-    ContenedorFunciones "1" o--- "0..*" Funcion
+    Usuario ...|> Elemento
+    Funcion ...|> Elemento
+
+    Elemento ---o Contenedor
+
+    ContenedorUsuarios ---|> Contenedor
+    ContenedorFunciones ---|> Contenedor
+
+
+
 }
 @enduml
